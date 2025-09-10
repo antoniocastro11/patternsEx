@@ -1,9 +1,16 @@
 import httpx
 
 class Api:
-    BaseURL = "https://score.hsborges.dev"
+    BaseURL = "https://score.hsborges.dev/api"
 
-    async def get_score(self, param):
+    async def get_score(self, cpf: str):
+        headers = {
+            "client-id": "12345"
+        }
+        params = {
+            "cpf": cpf
+        }
         async with httpx.AsyncClient() as client:
-            r = await cliente.get(f"{self.BaseURL}/score", param = {"param" : param})
+            r = await client.get(f"{self.BaseURL}/score", params=params, headers=headers)
+            r.raise_for_status()
             return r.json()
