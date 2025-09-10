@@ -6,17 +6,17 @@ from proxy.observer import metrics
 app = FastAPI()
 scheduler = AskScheduler.get_instance()
 
-@app.get("/proxy/score")
+@app.get("/proxy/score") # requisição do score
 async def proxy_score(param: str):
     cmd = ScoreAskCommand(param)
     future = await scheduler.enqueue(cmd)
     result = await future
     return result
 
-@app.get("/metrics")
+@app.get("/metrics") # pega as métricas
 def get_metrics():
     return metrics.get_metrics()
 
-@app.get("/health")
+@app.get("/health") # testa se ta no ar
 def health():
     return {"status": "ok"}
