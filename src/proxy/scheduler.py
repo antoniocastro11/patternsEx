@@ -24,12 +24,9 @@ class AskScheduler:
         return future
     
     async def _run(self):
-        print("Iniciando _run()...")
         while True:
-            print("Aguardando item na fila...")
             cmd, future = await self.queue.get()
             try:
-                print("Executando comando...")
                 result = await cmd.execute(self.client)
                 future.set_result(result)
                 metrics.notify("success")
