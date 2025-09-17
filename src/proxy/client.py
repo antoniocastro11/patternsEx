@@ -1,7 +1,12 @@
 import httpx
+import os
+from os import getenv
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class Api:
-    BaseURL = "https://score.hsborges.dev/api"
+    BaseURL = getenv("API_URL")
 
     async def get_score(self, cpf: str):
         headers = {
