@@ -13,3 +13,27 @@ O proxy implementado deve:
 1. Acomodar picos de requisições internas
 2. Minimizar latência e penalidade
 3. Monitor e expor métricas para tomada de decisão
+
+### Como rodar o projeto:
+
+1. Iniciar uvicorn
+
+   `uvicorn main:app --reload`
+
+2. Para verificar se o serviço está no ar:
+
+   `curl http://127.0.0.1:8000/health`
+
+   Resultado esperado: `{"status": "ok"}`
+
+3. Para fazer uma chamada à API
+
+   `curl http://127.0.0.1:8000/proxy/score?param=144.096.060-77`
+
+   Resultado esperado: retornar um JSON com o score, vindo da API externa.
+
+4. Verificar métricas
+
+   `curl http://127.0.0.1:8000/metrics`
+
+   Resultado esperado: `{"success": 1, "error": 0} ou {"success": 0, "error": 1}`
